@@ -1,4 +1,12 @@
 #!/usr/bin/python
+
+"""
+Requirments:
+    1. Python 2.7
+    2. <data> folder on the same level with the script which contains the logs
+Run with:
+    python main 11.22.33.44
+"""
 import sys
 
 __author__ = 'Lucian Tuca'
