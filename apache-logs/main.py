@@ -56,24 +56,27 @@ def process_zip(zip_path):
     start_f = time()
     start_gmt = gmtime()
 
+    end = long(50)
+
     if not redis_client.exists(zip_path):
         print "====================="
         print "PROCESSING: %s." % zip_path
 
         data = {}
+        lines = ['1']
+        with gzip.open(zip_path, "rb") as process_file:
 
-        with gzip.open(zip_path) as process_file:
+            while len(lines) > 0:
+                lines = list(islice(process_file, end))
+                for line in lines:
+                    _ip = get_ip(line)
+                    _bytes = long(get_bytes(line))
 
-            # lines = islice(process_file, 0, 40000)
-
-            for i, line in enumerate(process_file):
-                _ip = get_ip(line)
-                _bytes = long(get_bytes(line))
-
-                if _ip in data:
-                    data[_ip] += _bytes
-                else:
-                    data[_ip] = _bytes
+                    if _ip in data:
+                        data[_ip] += _bytes
+                    else:
+                        data[_ip] = _bytes
+                end += 50
 
         redis_client.hmset(zip_path, data)
         print "DONE: %s." % zip_path
