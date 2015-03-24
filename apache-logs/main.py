@@ -2,11 +2,11 @@
 
 """
 Requirments:
-    1. Python 2.7
-    2. Redis (server already started)
-    3. <data> folder on the same level with the script which contains the logs
+    1. Python 2.7.
+    2. Redis (server already started).
+    3. 'data' folder on the same level with the 'main.py' script which contains the logs.
 Run with:
-    python main 11.22.33.44
+    python main.py 11.22.33.44
 """
 import sys
 
