@@ -32,7 +32,7 @@ for input_file in data_files:
 
 
 def get_ip(line):
-    for i in range(7, 16):
+    for i in range(1, 16):
         if line[i] == ' ':
             return line[0:i]
 
