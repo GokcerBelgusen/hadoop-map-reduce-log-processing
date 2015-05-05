@@ -1,13 +1,12 @@
 package org.tzc.apachelogs;
 
 import org.apache.hadoop.io.LongWritable;
-import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
 import java.io.IOException;
 
 
-public class ALReducer extends Reducer<ALWritableComparable, ALWritableComparable, Text, LongWritable> {
+public class ALReducer extends Reducer<ALWritableComparable, ALWritableComparable, ALWritableComparable, LongWritable> {
 
     @Override
     public void reduce(ALWritableComparable key, Iterable<ALWritableComparable> values, Context context)
@@ -18,9 +17,7 @@ public class ALReducer extends Reducer<ALWritableComparable, ALWritableComparabl
             bytesSum += value.getApacheLogLine().getTransferredBytes().get();
         }
 
-        Text outKey = new Text(key.getApacheLogLine().getIp() + " " + key.getApacheLogLine().getStatusCode());
         LongWritable outValue = new LongWritable(bytesSum);
-
-        context.write(outKey, outValue);
+        context.write(key, outValue);
     }
 }

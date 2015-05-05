@@ -5,6 +5,9 @@ import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
+import redis.clients.jedis.Jedis;
+
+import java.util.Map;
 
 /**
  * Created by Lucian Tuca on 06/04/15.
@@ -38,11 +41,33 @@ public class ProcessLogs {
         job.setMapOutputKeyClass(ALWritableComparable.class);
         job.setMapOutputValueClass(ALWritableComparable.class);
 
-        job.setOutputKeyClass(ALWritableComparable.class);
-        job.setOutputValueClass(ALWritableComparable.class);
+        job.setOutputFormatClass(RedisHashOutputFormat.class);
+        RedisHashOutputFormat.setRedisHosts(job, "localhost");
+        RedisHashOutputFormat.setRedisHashKey(job, "first");
 
         boolean success = job.waitForCompletion(true);
 
-        System.exit(success ? 0 : 1);
+        Jedis jedis = new Jedis("localhost");
+        jedis.connect();
+
+        /**
+         * 1. Given an IP, break down how much bandwidth has been used by status code (200, 404, 500, etc).
+         * Give the results in bytes as well as in percentages of the total.
+         */
+        String givenIp = "178.154.179.250";
+        Long total = 0l;
+
+        Map<String, String> statusIpBytes = jedis.hgetAll(givenIp);
+        for (String key : statusIpBytes.keySet()) {
+            total += Long.parseLong(statusIpBytes.get(key));
+        }
+
+        System.out.println("Total for IP " + givenIp + " = " + total);
+
+        for (String statusKey : statusIpBytes.keySet()) {
+            Long bytes = Long.parseLong(statusIpBytes.get(statusKey));
+            Double percent = (bytes * 100.0) / total;
+            System.out.println("\tStatus " + statusKey + " = " + bytes + ", " + percent + "%");
+        }
     }
 }

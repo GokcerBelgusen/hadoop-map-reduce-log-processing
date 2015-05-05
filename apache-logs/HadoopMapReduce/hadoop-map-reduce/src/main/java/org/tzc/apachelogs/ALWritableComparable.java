@@ -67,28 +67,22 @@ public class ALWritableComparable implements WritableComparable<ALWritableCompar
 
     public int compareTo(ALWritableComparable alWritableComparable) {
 
-        int code;
         ApacheLogLine thisLogLine = apacheLogLine;
         ApacheLogLine thatLogLine = alWritableComparable.getApacheLogLine();
 
-        if ((thisLogLine.getIp().equals(thatLogLine.getIp()))) {
-            code = thisLogLine.getStatusCode().compareTo(thatLogLine.getStatusCode());
-        } else {
-            code = thisLogLine.getIp().compareTo(thatLogLine.getIp());
+        if (thisLogLine.getIp().equals(thatLogLine.getIp())) {
+            if (thisLogLine.getStatusCode().equals(thatLogLine.getStatusCode())) {
+                return 0;
+            }
+            else {
+                return thisLogLine.getStatusCode().compareTo(thatLogLine.getStatusCode());
+            }
         }
-
-        return code;
+        else {
+            return thisLogLine.getIp().compareTo(thatLogLine.getIp());
+        }
     }
 
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-
-        //TODO 1 - hashcode
-
-        return result;
-    }
 
     @Override
     public String toString() {
