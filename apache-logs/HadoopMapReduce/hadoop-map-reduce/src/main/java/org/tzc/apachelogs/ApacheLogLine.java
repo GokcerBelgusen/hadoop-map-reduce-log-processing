@@ -4,7 +4,9 @@ import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 
 /**
- * Created by Lucian Tuca on 07/04/15.
+ * @author Lucian Tuca
+ *         07/04/15
+ *         HadoopMapReduce
  */
 public class ApacheLogLine {
     private Text ip;

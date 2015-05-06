@@ -5,7 +5,11 @@ import org.apache.hadoop.mapreduce.Reducer;
 
 import java.io.IOException;
 
-
+/**
+ * @author Lucian Tuca
+ *         07/04/15
+ *         HadoopMapReduce
+ */
 public class ALReducer extends Reducer<ALWritableComparable, ALWritableComparable, ALWritableComparable, LongWritable> {
 
     @Override

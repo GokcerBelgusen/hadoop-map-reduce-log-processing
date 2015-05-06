@@ -8,7 +8,9 @@ import org.apache.hadoop.mapreduce.lib.output.NullOutputFormat;
 import java.io.IOException;
 
 /**
- * Created by Lucian Tuca on 28/04/15.
+ * @author Lucian Tuca
+ *         07/04/15
+ *         HadoopMapReduce
  */
 // This output format class is templated to accept a key and value of type Text
 public class RedisHashOutputFormat extends OutputFormat<ALWritableComparable, LongWritable> {

@@ -9,7 +9,9 @@ import java.io.DataOutput;
 import java.io.IOException;
 
 /**
- * Created by Lucian Tuca on 07/04/15.
+ * @author Lucian Tuca
+ *         07/04/15
+ *         HadoopMapReduce
  */
 public class ALWritableComparable implements WritableComparable<ALWritableComparable> {
 
@@ -73,12 +75,10 @@ public class ALWritableComparable implements WritableComparable<ALWritableCompar
         if (thisLogLine.getIp().equals(thatLogLine.getIp())) {
             if (thisLogLine.getStatusCode().equals(thatLogLine.getStatusCode())) {
                 return 0;
-            }
-            else {
+            } else {
                 return thisLogLine.getStatusCode().compareTo(thatLogLine.getStatusCode());
             }
-        }
-        else {
+        } else {
             return thisLogLine.getIp().compareTo(thatLogLine.getIp());
         }
     }

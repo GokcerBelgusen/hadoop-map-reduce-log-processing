@@ -9,7 +9,9 @@ import java.io.IOException;
 import java.util.HashMap;
 
 /**
- * Created by Lucian Tuca on 28/04/15.
+ * @author Lucian Tuca
+ *         28/04/15
+ *         HadoopMapReduce
  */
 public class RedisHashRecordWriter extends RecordWriter<ALWritableComparable, LongWritable> {
 

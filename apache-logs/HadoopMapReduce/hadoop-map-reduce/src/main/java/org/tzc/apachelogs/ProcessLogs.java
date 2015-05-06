@@ -10,7 +10,9 @@ import redis.clients.jedis.Jedis;
 import java.util.Map;
 
 /**
- * Created by Lucian Tuca on 06/04/15.
+ * @author Lucian Tuca
+ *         07/04/15
+ *         HadoopMapReduce
  */
 public class ProcessLogs {
 

@@ -9,6 +9,11 @@ import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * @author Lucian Tuca
+ *         07/04/15
+ *         HadoopMapReduce
+ */
 public class ALMapper extends Mapper<LongWritable, Text, ALWritableComparable, ALWritableComparable> {
 
     public static final int FIELDS_NO = 7;
